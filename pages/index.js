@@ -1,10 +1,44 @@
 import Head from 'next/head'
 import { Inter } from '@next/font/google'
+import { useState } from 'react';
+import Cookies from 'js-cookie';
+import axios from 'axios';
+import { useRouter } from "next/router";
 
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: '',
+    username: '',
+    password: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+  };
+  const logIn = (e) => {
+    e.preventDefault();
+    Cookies.set("loggedin", "true");
+    router.push("/dashboard");
+  };
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    console.log('Form data:', formData);
+    const response = await axios.post(`http://ap.almalk.org:3000/login-admin/${formData.username}`, 
+    {'email':`${formData.email}`,
+    'password':`${formData.password}`
+  });
+
+    console.log('API reponse:', response.data);
+    if(response.data.message === "Successfully logged in"){
+      Cookies.set('token', response.data.token);
+      logIn(e);
+    }
+  };
   return (
     <>
       <Head>
@@ -14,7 +48,53 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        
+      <div className="bg-quaternary min-h-screen flex flex-col justify-center items-center">
+      <h1 className="text-primary text-3xl mb-8">Login</h1>
+      <form className="bg-tertiary rounded-lg px-8 py-6" onSubmit={handleSubmit}>
+        <label htmlFor="email" className="text-white block mb-2">
+          Email
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          className="w-full p-2 mb-4 rounded border-none"
+          required
+        />
+        <label htmlFor="username" className="text-white block mb-2">
+          Username
+        </label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          className="w-full p-2 mb-4 rounded border-none"
+          required
+        />
+        <label htmlFor="password" className="text-white block mb-2">
+          Password
+        </label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          className="w-full p-2 mb-6 rounded border-none"
+          required
+        />
+        <button
+          type="submit"
+          className="bg-primary text-white px-4 py-2 rounded hover:bg-opacity-80"
+        >
+          Login
+        </button>
+      </form>
+    </div>
       </main>
     </>
   )
