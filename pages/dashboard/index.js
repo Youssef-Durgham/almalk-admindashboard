@@ -37,6 +37,27 @@ export default function Dashboard() {
       </div>
     </div>
       
+    <div className="flex flex-col md:flex-row justify-center items-center gap-8 p-6 ">
+
+      <div className="w-full md:w-1/4 h-64 bg-secondary rounded-lg shadow-lg flex flex-col justify-center items-center p-8">
+        <h2 className="text-white text-2xl font-bold mb-4">قائمة الفئات الموجودة   </h2>
+        <Link href="/dashboard/categories">
+          <button className="bg-white text-secondary py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-200">انتقل </button>
+        </Link>
+      </div>
+      <div className="w-full md:w-1/4 h-64 bg-tertiary rounded-lg shadow-lg flex flex-col justify-center items-center p-8">
+        <h2 className="text-white text-2xl font-bold mb-4">  أضافة فئة جديدة</h2>
+        <Link href="/dashboard/addrequiredfields">
+          <button className="bg-white text-tertiary py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-200">انتقل </button>
+        </Link>
+      </div>
+      <div className="w-full md:w-1/4 h-64 bg-quaternary rounded-lg shadow-lg flex flex-col justify-center items-center p-8">
+        <h2 className="text-white text-2xl font-bold mb-4"> Admin أضافة </h2>
+        <Link href="/dashboard/adduser">
+          <button className="bg-white text-quaternary py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-200">انتقل </button>
+        </Link>
+      </div>
+    </div>
    
   
       </main>
