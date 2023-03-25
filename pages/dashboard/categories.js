@@ -45,9 +45,9 @@ function CategoriesTable() {
        </>
     ):
     (
-      <div className="flex-col justify-center mb-16 items-center h-screen">
+      <div className="flex-col justify-center  mb-16 items-center h-screen">
       <div className='text-3xl text-center   m-4 font-bold'> Categories List</div>
-      <table className="table-auto bg-white  mx-auto w-[60%] 2xl:w-[40%] mobile:w-[90%] p-4 shadow-md">
+      <table className="table-auto bg-gray-800 text-white rounded-md  mx-auto w-[60%] 2xl:w-[40%] mobile:w-[90%] p-4 shadow-md">
         <thead>
           <tr>
             <th className="px-4 text-lg  py-2">Name</th>

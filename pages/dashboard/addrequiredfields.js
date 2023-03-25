@@ -5,8 +5,10 @@ import { useRouter } from "next/router";
 
 export default function AddRequiredField() {
   const [name, setName] = useState("");
+  const [nameError, setNameError] = useState(null);
+
   const [requiredFields, setRequiredFields] = useState([]);
-  const [errors, setErrors] = useState([]);
+  const [newErrors, setNewErrors] = useState(null);
   const userToken = Cookies.get("token");
   const router = useRouter();
 
@@ -18,6 +20,8 @@ export default function AddRequiredField() {
 
   const handleNameChange = (event) => {
     setName(event.target.value);
+    setNameError(null)
+    setNewErrors(null)
   };
 
   const handleAddFieldClick = () => {
@@ -28,6 +32,7 @@ export default function AddRequiredField() {
     const newRequiredFields = [...requiredFields];
     newRequiredFields[index] = event.target.value;
     setRequiredFields(newRequiredFields);
+    setNewErrors(null)
   };
 
   const handleRemoveFieldClick = (indexToRemove) => {
@@ -35,63 +40,67 @@ export default function AddRequiredField() {
       (_, index) => index !== indexToRemove
     );
     setRequiredFields(newRequiredFields);
-    const newErrors = errors.filter((_, index) => index !== indexToRemove);
-    setErrors(newErrors);
+    // const newErrors = errors.filter((_, index) => index !== indexToRemove);
+    // setNewErrors(newErrors);
+    setNewErrors(null)
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newErrors = [];
     if (name.trim() === "") {
-      newErrors.push("Name is required");
+      setNameError("Please Enter The Category Name");
+      return;
     }
+  
     const fieldsWithValues = requiredFields.filter((field) => field.trim() !== "");
-    if (fieldsWithValues.length === 0) {
-      newErrors.push("At least one required field is required");
+    const fieldsWithNoValues = requiredFields.filter((field) => field.trim() === "");
+  
+    if (fieldsWithNoValues.length >= 1) {
+      setNewErrors("Please Enter The value of all fields you add or remove that one you do'nt need it");
+      return;
     }
-    setErrors(newErrors);
-    if (newErrors.length === 0) {
-
-      const data = {
-        name,
-        fieldName: fieldsWithValues,
-      };
-
-      const postData = async () => {
-
-        try {
-            const res = await fetch("http://ap.almalk.org:3000/category/required-fields", {
-                method: "POST",
-                headers: {
-                    "content-type": "application/json",
-                    "x-access-token": JSON.stringify(userToken),
-                },
-                body: JSON.stringify(data),
-            });
-
-
-            // const responseData = await res.json();
-      
-            if (res.status === 401) {
-              console.log("run 2 401")
-            }
-            router.push('/dashboard/categories')
-          } catch (error) {
-            console.error("error", error);
-            console.log("run 3")
-          }
+  
+    if (!fieldsWithValues.length >= 1) {
+      setNewErrors("At least one field is required");
+      return;
+    }
+  
+    const data = {
+      name,
+      fieldName: fieldsWithValues,
     };
-
+  
+    const postData = async () => {
+      try {
+        const res = await fetch("http://ap.almalk.org:3000/category/required-fields", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            "x-access-token": JSON.stringify(userToken),
+          },
+          body: JSON.stringify(data),
+        });
+  
+        if (res.status === 401) {
+          console.log("run 2 401");
+        }
+        router.push("/dashboard/categories");
+      } catch (error) {
+        console.error("error", error);
+        console.log("run 3");
+      }
+    };
+  
     postData();
-    }
   };
+  
 
   return (
     <>
     <Navbar/>
-    <form onSubmit={handleSubmit} className="max-w-md my-[100px] mobile:w-[90%] border-1 bg-white p-10 shadow-md mx-auto">
-      <div className="mb-4">
-        <label className="block text-gray-900 font-bold mb-2" htmlFor="name">
+    <form onSubmit={handleSubmit} className="max-w-md my-[100px] mobile:w-[90%] rounded-md border-1 bg-gray-800 text-white p-10 shadow-md mx-auto">
+      <div className="mb-4 text-white">
+        <label className="block  font-bold mb-2 text-white" htmlFor="name">
           Category Name:
         </label>
         <input
@@ -99,14 +108,14 @@ export default function AddRequiredField() {
           id="name"
           value={name}
           onChange={handleNameChange}
-          className="shadow appearance-none py-3 px-3 text-gray-700 leading-tight  focus:shadow-outline   border w-full  border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+          className=" appearance-none py-3 px-3 text-gray-700 leading-tight  focus:shadow-outline   focus:border-2 w-full  border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
         />
-        {errors.includes("Name is required") && (
+        {nameError && (
           <p className="text-red-500 text-xs italic">Name is required</p>
         )}
       </div>
       <div className="mb-4">
-        <label className="block text-gray-900 font-bold mb-2" htmlFor="requiredFields">
+        <label className="block text-white font-bold mb-2" htmlFor="requiredFields">
           Required Fields:
         </label>
         {requiredFields.map((field, index) => (
@@ -115,11 +124,11 @@ export default function AddRequiredField() {
               type="text"
               value={field}
               onChange={(event) => handleFieldChange(event, index)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight  focus:shadow-outline border-gray-500 p-3  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+              className=" appearance-none focus:border-2 rounded w-full py-2 px-3 text-gray-700 leading-tight  focus:shadow-outline border-gray-500 p-3  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
             />
-            {errors[index] && (
+            {/* {errors[index] && (
               <p className="text-red-500 text-xs italic ml-2">{errors[index]}</p>
-            )}
+            )} */}
             <button
               type="button"
               className="ml-2 text-red-500"
@@ -136,8 +145,8 @@ export default function AddRequiredField() {
         >
           Add Field
         </button>
-        {errors.includes("At least one required field is required") && (
-      <p className="text-red-500 text-xs italic">At least one required field is required</p>
+        {newErrors && (
+      <p className="text-red-500 text-xs italic">{newErrors}</p>
     )}
   </div>
   <button

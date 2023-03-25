@@ -87,12 +87,12 @@ export default function AddUser() {
       }}
     >
       {({ errors, touched }) => (
-        <div className="h-screen mobile:mt-[100px]  mobile:bg-slate-100 bg-slate-100 mobile:bg-inherit flex justify-center items-center w-full">
+        <div className="h-screen mobile:mt-[100px]   mobile:bg-slate-100 bg-slate-100 mobile:bg-inherit flex justify-center items-center w-full">
           {loadding ? (<>
             <Loader />
           </>) : (<>
             <Form className="mobile:mt-[-250px] ">
-              <div className="bg-white  mobile:bg-white  px-10 py-8 rounded-md w-screen shadow-md mobile:rounded-2xl mobile:w-[100%]  mobile:bg-inherit mobile:mx-auto max-w-sm">
+              <div className="bg-gray-800 text-white  px-10 py-8 rounded-md w-screen shadow-md mobile:rounded-2xl mobile:w-[98%]  my-auto mobile:mx-auto max-w-sm">
                 <h1 className="text-left text-4xl font-semibold">Add Admin User</h1>
 
                 <div className="space-y-4">
@@ -116,11 +116,11 @@ export default function AddUser() {
                         type="email"
                         className={
                           touched.email
-                            ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.email
+                            ? `focus:border-2 w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.email
                               ? `${styles.invalid}`
                               : `${styles.valid}`
                             } `
-                            : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+                            : "focus:border-2 w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
                         }
                         name="email"
                       /* placeholder="Your Name " */
@@ -139,11 +139,11 @@ export default function AddUser() {
                         type={showPassword ? 'text' : 'password'}
                         className={
                           touched.password
-                            ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.password
+                            ? `focus:border-2 w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.password
                               ? `${styles.invalid}`
                               : `${styles.valid}`
                             } `
-                            : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+                            : "focus:border-2 w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
                         }
                         name="password"
                       />
@@ -177,11 +177,11 @@ export default function AddUser() {
                         type={showPassword ? 'text' : 'password'}
                         className={
                           touched.password2
-                            ? `border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.password2
+                            ? `focus:border-2 w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.password2
                               ? `${styles.invalid}`
                               : `${styles.valid}`
                             } `
-                            : "border w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+                            : "focus:border-2 w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
                         }
                         name="password2"
 
