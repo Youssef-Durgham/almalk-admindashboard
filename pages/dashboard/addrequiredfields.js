@@ -69,7 +69,7 @@ export default function AddRequiredField() {
       name,
       fieldName: fieldsWithValues,
     };
-  
+  console.log(data);
     const postData = async () => {
       try {
         const res = await fetch("http://ap.almalk.org:3000/category/required-fields", {

@@ -2,7 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/dashboard": "pages/dashboard.js",
-  "/dashboard/addrequiredfields": "pages/dashboard/addrequiredfields.js",
-  "/dashboard/ads": "pages/dashboard/ads.js"
+  "/dashboard/categories": "pages/dashboard/categories.js"
 }

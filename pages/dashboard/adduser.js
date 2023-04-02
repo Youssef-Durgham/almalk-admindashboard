@@ -116,11 +116,11 @@ export default function AddUser() {
                         type="email"
                         className={
                           touched.email
-                            ? `focus:border-2 w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.email
+                            ? `focus:border-2 w-full text-black border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.email
                               ? `${styles.invalid}`
                               : `${styles.valid}`
                             } `
-                            : "focus:border-2 w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+                            : "focus:border-2 w-full text-black border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
                         }
                         name="email"
                       /* placeholder="Your Name " */
@@ -139,11 +139,11 @@ export default function AddUser() {
                         type={showPassword ? 'text' : 'password'}
                         className={
                           touched.password
-                            ? `focus:border-2 w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.password
+                            ? `focus:border-2 w-full text-black border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.password
                               ? `${styles.invalid}`
                               : `${styles.valid}`
                             } `
-                            : "focus:border-2 w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+                            : "focus:border-2 w-full text-black border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
                         }
                         name="password"
                       />
@@ -177,11 +177,11 @@ export default function AddUser() {
                         type={showPassword ? 'text' : 'password'}
                         className={
                           touched.password2
-                            ? `focus:border-2 w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.password2
+                            ? `focus:border-2 w-full text-black border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left ${errors.password2
                               ? `${styles.invalid}`
                               : `${styles.valid}`
                             } `
-                            : "focus:border-2 w-full border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
+                            : "focus:border-2 w-full text-black border-gray-500 p-3 rounded-md  focus:border-[#E77600] focus:shadow-md focus:outline-none text-left"
                         }
                         name="password2"
 
